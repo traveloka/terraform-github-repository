@@ -27,7 +27,7 @@ variable "allow_merge_commit" {
 }
 
 variable "allow_squash_merge" {
-  default = false
+  default = true
 }
 
 variable "allow_rebase_merge" {
