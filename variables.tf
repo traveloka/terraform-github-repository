@@ -53,3 +53,8 @@ variable "license_template" {
 variable "default_branch" {
   default = ""
 }
+
+variable "owner" {
+  type        = "string"
+  description = "owner of the repository. will be prefixed to the name for private repositories"
+}
