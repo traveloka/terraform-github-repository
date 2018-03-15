@@ -51,5 +51,5 @@ variable "license_template" {
 }
 
 variable "default_branch" {
-  default = "master"
+  default = ""
 }
