@@ -1,5 +1,5 @@
 resource "github_repository" "main" {
-  name               = "${var.private} ? ${var.owner}-${var.name} : ${var.name}"
+  name               = "${var.private ? format("%s-%s", var.owner, var.name): var.name}"
   description        = "${var.description}"
   homepage_url       = "${var.homepage_url}"
   private            = "${var.private}"
