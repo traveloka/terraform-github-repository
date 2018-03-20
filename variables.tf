@@ -70,5 +70,5 @@ variable "default_branch" {
 
 variable "owner" {
   type        = "string"
-  description = "owner of the repository. will be prefixed to the name for private repositories"
+  description = "owner of the repository"
 }
