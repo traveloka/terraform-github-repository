@@ -16,7 +16,7 @@ resource "github_repository" "main" {
 }
 
 resource "github_branch_protection" "main" {
-  repository     = "${github_repository.main.full_name}"
+  repository     = "${var.name}"
   branch         = "${var.default_branch}"
   enforce_admins = true
 

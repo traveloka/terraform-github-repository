@@ -64,7 +64,7 @@ variable "license_template" {
 }
 
 variable "default_branch" {
-  default     = ""
+  default     = "master"
   description = "the name of the default branch of the repository. Only applicable if the repository and the branch is already created"
 }
 
