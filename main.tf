@@ -1,5 +1,5 @@
 resource "github_repository" "main" {
-  name               = "${var.private ? format("%s-%s", var.owner, var.name): var.name}"
+  name               = "${var.name}"
   description        = "${var.description}"
   homepage_url       = "${var.homepage_url}"
   private            = "${var.private}"
@@ -13,4 +13,27 @@ resource "github_repository" "main" {
   gitignore_template = "${var.gitignore_template}"
   license_template   = "${var.license_template}"
   default_branch     = "${var.default_branch}"
+}
+
+resource "github_branch_protection" "main" {
+  repository     = "${github_repository.main.full_name}"
+  branch         = "${var.default_branch}"
+  enforce_admins = true
+
+  required_status_checks {
+    strict   = true
+    contexts = []
+  }
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews      = true
+    dismissal_users            = []
+    dismissal_teams            = ["${var.owner}"]
+    require_code_owner_reviews = true
+  }
+
+  restrictions {
+    users = []
+    teams = []
+  }
 }

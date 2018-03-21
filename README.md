@@ -12,7 +12,6 @@ module "my-repository" {
 ```
 
 ## Conventions
-  -  "owner" variable value will be prefixed to the repository name for private repositories
 
 ## Authors
   - [Salvian Reynaldi](https://github.com/salvianreynaldi)

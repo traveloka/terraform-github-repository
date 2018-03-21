@@ -70,5 +70,5 @@ variable "default_branch" {
 
 variable "owner" {
   type        = "string"
-  description = "owner of the repository"
+  description = "the (github) team that owns the repository"
 }
