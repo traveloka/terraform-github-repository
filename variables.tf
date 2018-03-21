@@ -64,11 +64,11 @@ variable "license_template" {
 }
 
 variable "default_branch" {
-  default     = ""
+  default     = "master"
   description = "the name of the default branch of the repository. Only applicable if the repository and the branch is already created"
 }
 
 variable "owner" {
   type        = "string"
-  description = "owner of the repository"
+  description = "the (github) team that owns the repository"
 }
