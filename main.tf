@@ -30,7 +30,7 @@ resource "github_branch_protection" "main" {
     require_code_owner_reviews = true
   }
 
-  depends_on = ["github_team_repository.some_team_repo"]
+  depends_on = ["github_team_repository.main"]
 }
 
 resource "github_team_repository" "main" {
