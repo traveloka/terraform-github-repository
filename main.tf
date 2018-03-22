@@ -29,4 +29,12 @@ resource "github_branch_protection" "main" {
     dismissal_teams            = ["${var.owner}"]
     require_code_owner_reviews = true
   }
+
+  depends_on = ["github_team_repository.some_team_repo"]
+}
+
+resource "github_team_repository" "some_team_repo" {
+  team_id    = "${var.owner}"
+  repository = "${github_repository.main.name}"
+  permission = "pull"
 }
