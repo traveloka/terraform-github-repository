@@ -40,5 +40,5 @@ resource "github_branch_protection" "main" {
 resource "github_team_repository" "main" {
   team_id    = "${data.github_team.owner.id}"
   repository = "${github_repository.main.name}"
-  permission = "pull"
+  permission = "push"
 }
