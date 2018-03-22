@@ -33,7 +33,7 @@ resource "github_branch_protection" "main" {
   depends_on = ["github_team_repository.some_team_repo"]
 }
 
-resource "github_team_repository" "some_team_repo" {
+resource "github_team_repository" "main" {
   team_id    = "${var.owner}"
   repository = "${github_repository.main.name}"
   permission = "pull"
