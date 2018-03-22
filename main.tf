@@ -1,3 +1,7 @@
+data "github_team" "owner" {
+  slug = "${var.owner}"
+}
+
 resource "github_repository" "main" {
   name               = "${var.name}"
   description        = "${var.description}"
@@ -26,7 +30,7 @@ resource "github_branch_protection" "main" {
 
   required_pull_request_reviews {
     dismiss_stale_reviews      = true
-    dismissal_teams            = ["${var.owner}"]
+    dismissal_teams            = ["${data.github_team.owner.name}"]
     require_code_owner_reviews = true
   }
 
@@ -34,7 +38,7 @@ resource "github_branch_protection" "main" {
 }
 
 resource "github_team_repository" "main" {
-  team_id    = "${var.owner}"
+  team_id    = "${data.github_team.owner.id}"
   repository = "${github_repository.main.name}"
   permission = "pull"
 }
