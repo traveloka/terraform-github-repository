@@ -68,7 +68,20 @@ variable "default_branch" {
   description = "the name of the default branch of the repository. Only applicable if the repository and the branch is already created"
 }
 
-variable "owner" {
-  type        = "string"
-  description = "the (github) team that owns the repository"
+variable "push_teams" {
+  type        = "list"
+  default     = []
+  description = "the (github) teams which is granted push permission on the repository"
+}
+
+variable "pull_teams" {
+  type        = "list"
+  default     = []
+  description = "the (github) teams which is granted pull permission on the repository"
+}
+
+variable "dismiss_review_users" {
+  type        = "list"
+  default     = []
+  description = "the users which is granted the access to dismiss review on the repository"
 }

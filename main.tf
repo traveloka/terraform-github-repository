@@ -1,5 +1,11 @@
-data "github_team" "owner" {
-  slug = "${var.owner}"
+data "github_team" "push_teams" {
+  count = "${length(var.push_teams)}"
+  slug  = "${element(var.push_teams, count.index)}"
+}
+
+data "github_team" "pull_teams" {
+  count = "${length(var.pull_teams)}"
+  slug  = "${element(var.pull_teams, count.index)}"
 }
 
 resource "github_repository" "main" {
@@ -30,15 +36,21 @@ resource "github_branch_protection" "main" {
 
   required_pull_request_reviews {
     dismiss_stale_reviews      = true
-    dismissal_teams            = ["${data.github_team.owner.name}"]
+    dismissal_users            = ["${var.dismiss_review_users}"]
     require_code_owner_reviews = true
   }
-
-  depends_on = ["github_team_repository.main"]
 }
 
-resource "github_team_repository" "main" {
-  team_id    = "${data.github_team.owner.id}"
+resource "github_team_repository" "push_teams" {
+  count      = "${length(data.github_team.push_teams.*.id)}"
+  team_id    = "${element(data.github_team.push_teams.*.id, count.index)}"
   repository = "${github_repository.main.name}"
   permission = "push"
+}
+
+resource "github_team_repository" "pull_teams" {
+  count      = "${length(data.github_team.pull_teams.*.id)}"
+  team_id    = "${element(data.github_team.pull_teams.*.id, count.index)}"
+  repository = "${github_repository.main.name}"
+  permission = "pull"
 }
