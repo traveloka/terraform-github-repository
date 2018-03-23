@@ -72,3 +72,9 @@ variable "owner" {
   type        = "string"
   description = "the (github) team that owns the repository"
 }
+
+variable "teams" {
+  type        = "list"
+  default     = []
+  description = "the (github) teams which granted permission on the repository"
+}

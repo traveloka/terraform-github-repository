@@ -2,6 +2,11 @@ data "github_team" "owner" {
   slug = "${var.owner}"
 }
 
+data "github_team" "other_teams" {
+  count = "${length(var.teams)}"
+  slug  = "${element(var.teams, count.index)}"
+}
+
 resource "github_repository" "main" {
   name               = "${var.name}"
   description        = "${var.description}"
@@ -41,4 +46,11 @@ resource "github_team_repository" "main" {
   team_id    = "${data.github_team.owner.id}"
   repository = "${github_repository.main.name}"
   permission = "push"
+}
+
+resource "github_team_repository" "other_teams_repository" {
+  count      = "${length(data.github_team.other_teams.*.id)}"
+  team_id    = "${element(data.github_team.other_teams.*.id, count.index)}"
+  repository = "${github_repository.main.name}"
+  permission = "pull"
 }
