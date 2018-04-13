@@ -80,6 +80,12 @@ variable "pull_teams" {
   description = "the (github) teams which is granted pull permission on the repository"
 }
 
+variable "admin_teams" {
+  type        = "list"
+  default     = []
+  description = "the (github) teams which is granted admin permission on the repository"
+}
+
 variable "dismiss_review_users" {
   type        = "list"
   default     = []
