@@ -8,6 +8,11 @@ data "github_team" "pull_teams" {
   slug  = "${element(var.pull_teams, count.index)}"
 }
 
+data "github_team" "admin_teams" {
+  count = "${length(var.admin_teams)}"
+  slug  = "${element(var.admin_teams, count.index)}"
+}
+
 resource "github_repository" "main" {
   name               = "${var.name}"
   description        = "${var.description}"
@@ -53,4 +58,11 @@ resource "github_team_repository" "pull_teams" {
   team_id    = "${element(data.github_team.pull_teams.*.id, count.index)}"
   repository = "${github_repository.main.name}"
   permission = "pull"
+}
+
+resource "github_team_repository" "admin_teams" {
+  count      = "${length(data.github_team.admin_teams.*.id)}"
+  team_id    = "${element(data.github_team.admin_teams.*.id, count.index)}"
+  repository = "${github_repository.main.name}"
+  permission = "admin"
 }
