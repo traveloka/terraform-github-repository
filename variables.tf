@@ -113,5 +113,5 @@ variable "dismiss_review_users" {
 variable "status_check_contexts" {
   type        = "list"
   default     = []
-  description = "The list of required status checks in order to merge into the protected branch"
+  description = "The list of required status checks in order to merge into the protected branch, e.g. AWS CodeBuild ap-southeast-1 (<codebuild_project_name>)"
 }
