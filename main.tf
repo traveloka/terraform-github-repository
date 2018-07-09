@@ -46,23 +46,44 @@ resource "github_branch_protection" "main" {
   }
 }
 
-resource "github_team_repository" "push_teams" {
+resource "github_team_repository" "push" {
   count      = "${length(data.github_team.push_teams.*.id)}"
   team_id    = "${element(data.github_team.push_teams.*.id, count.index)}"
   repository = "${github_repository.main.name}"
   permission = "push"
 }
 
-resource "github_team_repository" "pull_teams" {
+resource "github_team_repository" "pull" {
   count      = "${length(data.github_team.pull_teams.*.id)}"
   team_id    = "${element(data.github_team.pull_teams.*.id, count.index)}"
   repository = "${github_repository.main.name}"
   permission = "pull"
 }
 
-resource "github_team_repository" "admin_teams" {
+resource "github_team_repository" "admin" {
   count      = "${length(data.github_team.admin_teams.*.id)}"
   team_id    = "${element(data.github_team.admin_teams.*.id, count.index)}"
   repository = "${github_repository.main.name}"
+  permission = "admin"
+}
+
+resource "github_repository_collaborator" "push" {
+  repository = "${github_repository.main.name}"
+  count      = "${length(var.push_collaborators)}"
+  username   = "${element(var.push_collaborators, count.index)}"
+  permission = "push"
+}
+
+resource "github_repository_collaborator" "pull" {
+  repository = "${github_repository.main.name}"
+  count      = "${length(var.pull_collaborators)}"
+  username   = "${element(var.pull_collaborators, count.index)}"
+  permission = "pull"
+}
+
+resource "github_repository_collaborator" "admin" {
+  repository = "${github_repository.main.name}"
+  count      = "${length(var.admin_collaborators)}"
+  username   = "${element(var.admin_collaborators, count.index)}"
   permission = "admin"
 }
