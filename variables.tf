@@ -89,19 +89,19 @@ variable "admin_teams" {
 variable "push_collaborators" {
   type        = "list"
   default     = []
-  description = "the GitHub user (can be from outside of the organization) which is granted push permission on the repository"
+  description = "the GitHub users (can be from outside of the organization) which is granted push permission on the repository"
 }
 
 variable "pull_collaborators" {
   type        = "list"
   default     = []
-  description = "the GitHub user (can be from outside of the organization) which is granted pull permission on the repository"
+  description = "the GitHub users (can be from outside of the organization) which is granted pull permission on the repository"
 }
 
 variable "admin_collaborators" {
   type        = "list"
   default     = []
-  description = "the GitHub user (can be from outside of the organization) which is granted admin permission on the repository"
+  description = "the GitHub users (can be from outside of the organization) which is granted admin permission on the repository"
 }
 
 variable "dismiss_review_users" {
