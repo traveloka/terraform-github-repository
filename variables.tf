@@ -109,3 +109,9 @@ variable "dismiss_review_users" {
   default     = []
   description = "the users which is granted the access to dismiss review on the repository"
 }
+
+variable "status_check_contexts" {
+  type        = "list"
+  default     = []
+  description = "the users which is granted the access to dismiss review on the repository"
+}

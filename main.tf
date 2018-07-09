@@ -36,7 +36,8 @@ resource "github_branch_protection" "main" {
   enforce_admins = true
 
   required_status_checks {
-    strict = true
+    strict  = true
+    context = "${var.status_checks_contexts}"
   }
 
   required_pull_request_reviews {
