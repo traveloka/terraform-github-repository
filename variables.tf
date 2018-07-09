@@ -107,11 +107,11 @@ variable "admin_collaborators" {
 variable "dismiss_review_users" {
   type        = "list"
   default     = []
-  description = "the users which is granted the access to dismiss review on the repository"
+  description = "the users which is granted the access to dismiss review on the protected branch"
 }
 
 variable "status_check_contexts" {
   type        = "list"
   default     = []
-  description = "the users which is granted the access to dismiss review on the repository"
+  description = "The list of required status checks in order to merge into the protected branch"
 }
