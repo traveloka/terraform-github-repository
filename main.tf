@@ -37,7 +37,7 @@ resource "github_branch_protection" "main" {
 
   required_status_checks {
     strict  = true
-    context = "${var.status_checks_context}"
+    context = "${var.status_checks_contexts}"
   }
 
   required_pull_request_reviews {
