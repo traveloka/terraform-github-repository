@@ -112,7 +112,7 @@ variable "dismiss_review_users" {
 
 variable "force_pr_rebase" {
   type        = "string"
-  default     = true
+  default     = false
   description = "whether PR should have up to date branches (e.g. rebased) before they're merged"
 }
 
