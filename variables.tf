@@ -110,6 +110,12 @@ variable "dismiss_review_users" {
   description = "the users which is granted the access to dismiss review on the protected branch"
 }
 
+variable "force_pr_rebase" {
+  type        = "string"
+  default     = true
+  description = "whether PR should have up to date branches (e.g. rebased) before they're merged"
+}
+
 variable "status_checks_contexts" {
   type        = "list"
   default     = []

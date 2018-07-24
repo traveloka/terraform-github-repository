@@ -36,7 +36,7 @@ resource "github_branch_protection" "main" {
   enforce_admins = true
 
   required_status_checks {
-    strict   = true
+    strict   = "${var.force_pr_rebase}"
     contexts = "${var.status_checks_contexts}"
   }
 
