@@ -1,16 +1,6 @@
-data "github_team" "push_teams" {
-  count = "${length(var.push_teams)}"
-  slug  = "${element(var.push_teams, count.index)}"
-}
-
-data "github_team" "pull_teams" {
-  count = "${length(var.pull_teams)}"
-  slug  = "${element(var.pull_teams, count.index)}"
-}
-
-data "github_team" "admin_teams" {
-  count = "${length(var.admin_teams)}"
-  slug  = "${element(var.admin_teams, count.index)}"
+data "github_team" "team_ids" {
+  count = "${length(keys(var.repository_teams_permission))}"
+  slug  = "${element(keys(var.repository_teams_permission), count.index)}"
 }
 
 resource "github_repository" "main" {
@@ -28,6 +18,8 @@ resource "github_repository" "main" {
   gitignore_template = "${var.gitignore_template}"
   license_template   = "${var.license_template}"
   default_branch     = "${var.default_branch}"
+  archived           = "${var.archived}"
+  topics             = "${var.topics}"
 }
 
 resource "github_branch_protection" "main" {
@@ -47,44 +39,16 @@ resource "github_branch_protection" "main" {
   }
 }
 
-resource "github_team_repository" "push" {
-  count      = "${length(data.github_team.push_teams.*.id)}"
-  team_id    = "${element(data.github_team.push_teams.*.id, count.index)}"
+resource "github_team_repository" "this" {
+  count      = "${length(keys(var.repository_teams_permission))}"
+  team_id    = "${element(data.github_team.team_ids.*.id, count.index)}"
   repository = "${github_repository.main.name}"
-  permission = "push"
+  permission = "${element(values(var.repository_teams_permission), count.index)}"
 }
 
-resource "github_team_repository" "pull" {
-  count      = "${length(data.github_team.pull_teams.*.id)}"
-  team_id    = "${element(data.github_team.pull_teams.*.id, count.index)}"
+resource "github_repository_collaborator" "this" {
+  count      = "${length(keys(var.repository_collaborators_permission))}"
+  username   = "${element(keys(var.repository_collaborators_permission), count.index)}"
   repository = "${github_repository.main.name}"
-  permission = "pull"
-}
-
-resource "github_team_repository" "admin" {
-  count      = "${length(data.github_team.admin_teams.*.id)}"
-  team_id    = "${element(data.github_team.admin_teams.*.id, count.index)}"
-  repository = "${github_repository.main.name}"
-  permission = "admin"
-}
-
-resource "github_repository_collaborator" "push" {
-  repository = "${github_repository.main.name}"
-  count      = "${length(var.push_collaborators)}"
-  username   = "${element(var.push_collaborators, count.index)}"
-  permission = "push"
-}
-
-resource "github_repository_collaborator" "pull" {
-  repository = "${github_repository.main.name}"
-  count      = "${length(var.pull_collaborators)}"
-  username   = "${element(var.pull_collaborators, count.index)}"
-  permission = "pull"
-}
-
-resource "github_repository_collaborator" "admin" {
-  repository = "${github_repository.main.name}"
-  count      = "${length(var.admin_collaborators)}"
-  username   = "${element(var.admin_collaborators, count.index)}"
-  permission = "admin"
+  permission = "${element(values(var.repository_collaborators_permission), count.index)}"
 }

@@ -68,52 +68,38 @@ variable "default_branch" {
   description = "the name of the default branch of the repository. Only applicable if the repository and the branch is already created"
 }
 
-variable "push_teams" {
-  type        = "list"
-  default     = []
-  description = "the GitHub teams which is granted push permission on the repository"
-}
-
-variable "pull_teams" {
-  type        = "list"
-  default     = []
-  description = "the GitHub teams which is granted pull permission on the repository"
-}
-
-variable "admin_teams" {
-  type        = "list"
-  default     = []
-  description = "the GitHub teams which is granted admin permission on the repository"
-}
-
-variable "push_collaborators" {
-  type        = "list"
-  default     = []
-  description = "the GitHub users (can be from outside of the organization) which is granted push permission on the repository"
-}
-
-variable "pull_collaborators" {
-  type        = "list"
-  default     = []
-  description = "the GitHub users (can be from outside of the organization) which is granted pull permission on the repository"
-}
-
-variable "admin_collaborators" {
-  type        = "list"
-  default     = []
-  description = "the GitHub users (can be from outside of the organization) which is granted admin permission on the repository"
-}
-
 variable "dismiss_review_users" {
   type        = "list"
   default     = []
   description = "the users which is granted the access to dismiss review on the protected branch"
 }
 
+variable "repository_teams_permission" {
+  type        = "map"
+  description = "the team permission settings for the repository; each team is mapped to a permission (admin, pull, or push)"
+}
+
+variable "repository_collaborators_permission" {
+  type        = "map"
+  description = "the collaborator permission settings for the repository; each username is mapped to a permission (admin, pull, or push)"
+}
+
 variable "force_pr_rebase" {
   type        = "string"
   default     = true
   description = "whether PR should have up to date branches (e.g. rebased) before they're merged"
+}
+
+variable "topics" {
+  type        = "list"
+  default     = []
+  description = "the repository topics"
+}
+
+variable "archived" {
+  type        = "string"
+  default     = false
+  description = "whether the repository should be archived or not"
 }
 
 variable "status_checks_contexts" {
