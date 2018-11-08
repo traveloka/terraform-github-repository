@@ -3,7 +3,6 @@ module "this" {
   name                        = "my-experiment-repository"
   description                 = "my experiment repository"
   private                     = false
-  repository_teams_permission = {}
 
   repository_teams_permission = {
     "team_1" = "pull"
