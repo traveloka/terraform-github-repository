@@ -34,7 +34,7 @@ resource "github_branch_protection" "main" {
 
   required_pull_request_reviews {
     dismiss_stale_reviews      = true
-    dismissal_users            = var.dismiss_review_users
+    dismissal_users            = "${var.dismiss_review_users}"
     require_code_owner_reviews = true
   }
 }
