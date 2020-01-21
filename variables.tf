@@ -102,6 +102,12 @@ variable "archived" {
   description = "whether the repository should be archived or not"
 }
 
+variable "enforce_admins" {
+  type        = "string"
+  default     = true
+  description = "whether the admin should be enforced for branch protection or not"
+}
+
 variable "status_checks_contexts" {
   type        = "list"
   default     = []
