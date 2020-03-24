@@ -1,10 +1,10 @@
 variable "name" {
-  type        = "string"
+  type        = string
   description = "the repository name"
 }
 
 variable "description" {
-  type        = "string"
+  type        = string
   description = "the repository description"
 }
 
@@ -69,47 +69,48 @@ variable "default_branch" {
 }
 
 variable "dismiss_review_users" {
-  type        = "list"
+  type        = list(string)
   default     = []
   description = "the users which is granted the access to dismiss review on the protected branch"
 }
 
 variable "repository_teams_permission" {
-  type        = "map"
+  type        = map(string)
   description = "the team permission settings for the repository; each team is mapped to a permission (admin, pull, or push)"
 }
 
 variable "repository_collaborators_permission" {
-  type        = "map"
+  type        = map(string)
   description = "the collaborator permission settings for the repository; each username is mapped to a permission (admin, pull, or push)"
 }
 
 variable "force_pr_rebase" {
-  type        = "string"
+  type        = string
   default     = true
   description = "whether PR should have up to date branches (e.g. rebased) before they're merged"
 }
 
 variable "topics" {
-  type        = "list"
+  type        = list(string)
   default     = []
   description = "the repository topics"
 }
 
 variable "archived" {
-  type        = "string"
+  type        = string
   default     = false
   description = "whether the repository should be archived or not"
 }
 
 variable "enforce_admins" {
-  type        = "string"
+  type        = string
   default     = true
   description = "whether the admin should be enforced for branch protection or not"
 }
 
 variable "status_checks_contexts" {
-  type        = "list"
+  type        = list(string)
   default     = []
   description = "The list of required status checks in order to merge into the protected branch, e.g. AWS CodeBuild ap-southeast-1 (<codebuild_project_name>)"
 }
+
