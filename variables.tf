@@ -124,3 +124,14 @@ variable "license_template" {
   description = "select github license tempate to init the repository with; see https://github.com/github/choosealicense.com/tree/gh-pages/_licenses"
 }
 
+variables "template_repository" {
+  type        = string
+  default     = ""
+  description = "The name of repository template for creating the new repository" 
+}
+
+variables "template_owner" {
+  type        = string
+  default     = ""
+  description = "The name of organization who owned the repository template" 
+}
