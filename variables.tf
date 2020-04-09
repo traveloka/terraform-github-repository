@@ -114,3 +114,14 @@ variable "status_checks_contexts" {
   description = "The list of required status checks in order to merge into the protected branch, e.g. AWS CodeBuild ap-southeast-1 (<codebuild_project_name>)"
 }
 
+variables "template_repository" {
+  type        = string
+  default     = ""
+  description = "The name of repository template for creating the new repository" 
+}
+
+variables "template_owner" {
+  type        = string
+  default     = "traveloka"
+  description = "The name of organization who owned the repository template" 
+}

@@ -20,6 +20,11 @@ resource "github_repository" "main" {
   default_branch     = var.default_branch
   archived           = var.archived
   topics             = var.topics
+  
+  template {
+    owner = var.template_owner
+    repository = var.template_repository
+  }
 }
 
 resource "github_branch_protection" "main" {
