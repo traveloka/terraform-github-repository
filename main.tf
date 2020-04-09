@@ -22,7 +22,7 @@ resource "github_repository" "main" {
   topics             = var.topics
   
   dynamic "template" {
-    for_each = [var.template_repository]
+    for_each = (var.template_repository != "") ? ["dummy"] : []
     content {
       owner = var.template_owner
       repository = var.template_repository
