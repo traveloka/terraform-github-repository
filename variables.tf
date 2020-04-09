@@ -122,6 +122,6 @@ variables "template_repository" {
 
 variables "template_owner" {
   type        = string
-  default     = "traveloka"
+  default     = ""
   description = "The name of organization who owned the repository template" 
 }
