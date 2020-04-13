@@ -127,7 +127,8 @@ variable "license_template" {
 # Optional input, for using a repository template to initialize the repository
 # known interactions:
 # - auto_init set to false, template_repository and template_owner filled -> there is still a commit "Initial commit" that matches the template
-# 
+# - auto_init set to true, template_repository and template_owner left with default value -> Initial commit with just README.md
+# - template_repository set to null -> error
 
 variable "template_repository" {
   type        = string
