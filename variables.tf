@@ -124,13 +124,19 @@ variable "license_template" {
   description = "select github license tempate to init the repository with; see https://github.com/github/choosealicense.com/tree/gh-pages/_licenses"
 }
 
-variables "template_repository" {
+# Optional input, for using a repository template to initialize the repository
+# known interactions:
+# - auto_init set to false, template_repository and template_owner filled -> there is still a commit "Initial commit" that matches the template
+# - auto_init set to true, template_repository and template_owner left with default value -> Initial commit with just README.md
+# - template_repository set to null -> error
+
+variable "template_repository" {
   type        = string
   default     = ""
   description = "The name of repository template for creating the new repository" 
 }
 
-variables "template_owner" {
+variable "template_owner" {
   type        = string
   default     = ""
   description = "The name of organization who owned the repository template" 

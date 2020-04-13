@@ -21,9 +21,12 @@ resource "github_repository" "main" {
   archived           = var.archived
   topics             = var.topics
   
-  template {
-    owner = var.template_owner
-    repository = var.template_repository
+  dynamic "template" {
+    for_each = (var.template_repository != "") ? ["dummy"] : []
+    content {
+      owner = var.template_owner
+      repository = var.template_repository
+    }
   }
 }
 
