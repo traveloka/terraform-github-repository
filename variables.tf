@@ -133,11 +133,11 @@ variable "license_template" {
 variable "template_repository" {
   type        = string
   default     = ""
-  description = "The name of repository template for creating the new repository" 
+  description = "The name of repository template for creating the new repository"
 }
 
 variable "template_owner" {
   type        = string
   default     = ""
-  description = "The name of organization who owned the repository template" 
+  description = "The name of organization who owned the repository template"
 }

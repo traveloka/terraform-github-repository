@@ -1,6 +1,6 @@
 data "github_team" "team_ids" {
-  count = length(keys(var.repository_teams_permission))
-  slug  = element(keys(var.repository_teams_permission), count.index)
+  for_each = var.repository_teams_permission
+  slug     = each.key
 }
 
 resource "github_repository" "main" {
@@ -20,11 +20,11 @@ resource "github_repository" "main" {
   default_branch     = var.default_branch
   archived           = var.archived
   topics             = var.topics
-  
+
   dynamic "template" {
     for_each = (var.template_repository != "") ? ["dummy"] : []
     content {
-      owner = var.template_owner
+      owner      = var.template_owner
       repository = var.template_repository
     }
   }
@@ -48,16 +48,15 @@ resource "github_branch_protection" "main" {
 }
 
 resource "github_team_repository" "this" {
-  count      = length(keys(var.repository_teams_permission))
-  team_id    = element(data.github_team.team_ids.*.id, count.index)
+  for_each   = var.repository_teams_permission
   repository = github_repository.main.name
-  permission = element(values(var.repository_teams_permission), count.index)
-}
-
-resource "github_repository_collaborator" "this" {
-  for_each = var.repository_collaborators_permission
-  username   = each.key
-  repository = github_repository.main.name
+  team_id    = data.github_team.team_ids[each.key].id
   permission = each.value
 }
 
+resource "github_repository_collaborator" "this" {
+  for_each   = var.repository_collaborators_permission
+  repository = github_repository.main.name
+  username   = each.key
+  permission = each.value
+}
